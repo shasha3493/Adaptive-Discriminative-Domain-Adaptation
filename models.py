@@ -6,16 +6,14 @@ class Encoder(nn.Module):
     '''
     Encoder part of the classification network
     '''
-    def __init__(self, in_channels=1, dropout=0.5): #, h=256):
+    def __init__(self, in_channels=1, dropout=0.5): 
         super(Encoder, self).__init__()
         self.conv1 = nn.Conv2d(in_channels, 20, kernel_size=5, stride=1)
         self.conv2 = nn.Conv2d(20, 50, kernel_size=5, stride=1)
         self.bn1 = nn.BatchNorm2d(20)
         self.bn2 = nn.BatchNorm2d(50)
-        # self.conv3 = nn.Conv2d(16, 120, kernel_size=4, stride=1)
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
         self.relu = nn.ReLU()
-        # self.dropout1 = nn.Dropout2d(dropout)
         self.dropout = nn.Dropout(dropout)
         self.fc = nn.Linear(1250, 500)
 

@@ -16,11 +16,6 @@ def run(args):
     # Creating directory (if it doesn't exist) to store model
     if not os.path.exists(args.logdir):
         os.makedirs(args.logdir)
-    
-    # main.log is created whilst tarining source cnn 
-    logger = get_logger(os.path.join(args.logdir, 'main.log'))
-    # print(logger.info(args))
-    # input()
 
     # Souce domain Image tranformation
         # Converting image to tensor

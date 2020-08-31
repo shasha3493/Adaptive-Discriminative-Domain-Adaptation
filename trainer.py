@@ -57,14 +57,11 @@ def train_target_cnn(
     validation = validate(source_cnn, target_test_loader, criterion, args=args)
     print('Without Domain Adaptation, accuracy of classfication network on target domain\'s test data: {}'.format(validation['acc']))
     print('################################################################################################################')
-    # log_source = 'Source/Acc {:.3f} '.format(validation['acc'])
-
-    # writer = SummaryWriter(args.logdir)
+    
     best_score = None
 
     # Training target cnn and discriminator
     for epoch_i in range(1, 1 + args.epochs):
-        # start_time = time()
 
         # One epoch of training of target classification network's encoder and discriminator
         # a dictionary containing containing avg loss/batch for discriminator and target cnn encoder
@@ -86,17 +83,6 @@ def train_target_cnn(
         validation2 = validate(
             target_cnn, target_train_loader, criterion, args=args)
 
-        # log = 'Epoch {}/{} '.format(epoch_i, args.epochs)
-        # log += 'D/Loss {:.3f} Target/Loss {:.3f} '.format(
-        #     training['d/loss'], training['target/loss'])
-        # log += '[Val] Target/Loss {:.3f} Target/Acc {:.3f} '.format(
-        #     validation['loss'], validation['acc'])
-        # log += log_source
-        # log += '[Train] Target/Loss {:.3f} Target/Acc {:.3f} '.format(
-        #     validation2['loss'], validation2['acc'])
-        # log += 'Time {:.2f}s'.format(time() - start_time)
-        # logger.info(log)
-
         print('Epoch {}/{} | D Loss: {} | Target encoder loss: {} | Train Loss: {} | Train Acc: {} \
               | Val Loss: {} | Val Acc: {}'.format(epoch_i, args.epochs, training['d/loss'], 
               training['target/loss'], validation['loss'], validation['acc'], validation2['loss'], validation2['acc']))
@@ -112,12 +98,6 @@ def train_target_cnn(
         }
         save(args.logdir, state_dict, is_best)
 
-        # tensorboard
-        # writer.add_scalar('Adv/D/Loss', training['d/loss'], epoch_i)
-        # writer.add_scalar('Adv/Target/Loss', training['target/loss'], epoch_i)
-        # writer.add_scalar('Val/Target/Loss', validation['loss'], epoch_i)
-        # writer.add_scalar('Val/Target/Acc', validation['acc'], epoch_i)
-        # writer.add_scalar('Train/Target/Acc', validation2['acc'], epoch_i)
 
     target_cnn.load_state_dict(torch.load(args.logdir))
     validation = validate(target_cnn, target_test_loader, criterion, args=args)

@@ -6,37 +6,18 @@ import torch
 
 
 def save(log_dir, state_dict, is_best):
-    # checkpoint_path = os.path.join(log_dir, 'checkpoint.pt')
-    # # Saves the model
-    # torch.save(state_dict, checkpoint_path)
-
 
     if is_best:
         # best model is saved by the name best_model.pt
         best_model_path = os.path.join(log_dir, 'best_model.pt')
-        # shutil.copyfile(checkpoint_path, best_model_path)
         torch.save(state_dict, best_model_path)
 
 
-def get_logger(log_file):
-    from logging import getLogger, FileHandler, StreamHandler, Formatter, DEBUG, INFO  # noqa
-    fh = FileHandler(log_file)
-    fh.setLevel(DEBUG)
-    sh = StreamHandler()
-    sh.setLevel(INFO)
-    for handler in [fh, sh]:
-        formatter = Formatter('%(asctime)s - %(message)s')
-        handler.setFormatter(formatter)
-    logger = getLogger('adda')
-    logger.setLevel(INFO)
-    logger.addHandler(fh)
-    logger.addHandler(sh)
-    return logger
-
 
 class AverageMeter(object):
-    """Computes and stores the average and current value
-       https://github.com/pytorch/examples/blob/master/imagenet/main.py#L296
+    """
+    Computes and stores the average and current value
+    
     """
 
     def __init__(self):

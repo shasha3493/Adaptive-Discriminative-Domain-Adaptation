@@ -19,6 +19,6 @@ if __name__ == '__main__':
     parser.add_argument('--device', type=str, default='cuda:0')
     parser.add_argument('--n_workers', type=int, default=0)
     parser.add_argument('--logdir', type=str, default='best_models/target')
-    # parser.add_argument('--message', '-m',  type=str, default='')
+    
     args, unknown = parser.parse_known_args()
     experiment.run(args)
