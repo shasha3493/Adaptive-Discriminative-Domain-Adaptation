@@ -4,4 +4,6 @@ Implementation of [Adaptive-Discriminative-Domain-Adaptation](https://arxiv.org/
 
 ## Results
 
-(/results/adversarial.png)
+![adversarial.png](/results/adversarial.png)
+
+![target_domain.png](/results/target_domain.png)
